@@ -4,7 +4,7 @@ import { ITokenResponse } from 'src/types';
 const baseUrl = new URL(process.env.SUITE_URL);
 
 export const getTokens = async () => {
-  baseUrl.pathname = '/access_token';
+  const url = new URL('/access_token', baseUrl);
   const options = {
     method: 'POST',
     headers: { 'content-type': 'application/x-www-form-urlencoded' },
@@ -15,11 +15,11 @@ export const getTokens = async () => {
     }),
   };
 
-  return request<Omit<ITokenResponse, 'refresh_token'>>(baseUrl, options);
+  return request<Omit<ITokenResponse, 'refresh_token'>>(url, options);
 };
 
 export const createNewModule = async (accessToken: string, args: any) => {
-  baseUrl.pathname = '/V8/module';
+  const url = new URL('/V8/module', baseUrl);
   const options = {
     method: 'POST',
     headers: {
@@ -28,7 +28,7 @@ export const createNewModule = async (accessToken: string, args: any) => {
     },
     body: JSON.stringify(args),
   };
-  return request<any>(baseUrl, options);
+  return request<any>(url, options);
 };
 
 export const createRelationship = async (
@@ -37,7 +37,7 @@ export const createRelationship = async (
   id: string,
   args: any,
 ) => {
-  baseUrl.pathname = `/V8/module/${moduleName}/${id}/relationships`;
+  const url = new URL(`/V8/module/${moduleName}/${id}/relationships`, baseUrl);
   const options = {
     method: 'POST',
     headers: {
@@ -46,11 +46,11 @@ export const createRelationship = async (
     },
     body: JSON.stringify(args),
   };
-  return request<any>(baseUrl, options);
+  return request<any>(url, options);
 };
 
 export const updateModule = async (accessToken: string, args: any) => {
-  baseUrl.pathname = '/V8/module';
+  const url = new URL('/V8/module', baseUrl);
   const options = {
     method: 'PATCH',
     headers: {
@@ -59,7 +59,7 @@ export const updateModule = async (accessToken: string, args: any) => {
     },
     body: JSON.stringify(args),
   };
-  return request<any>(baseUrl, options);
+  return request<any>(url, options);
 };
 
 export const getFilteredAccounts = async (
@@ -67,8 +67,8 @@ export const getFilteredAccounts = async (
   name: string,
   email: string,
 ) => {
-  baseUrl.pathname = '/V8/module/Accounts';
-  baseUrl.search = new URLSearchParams(
+  const url = new URL('/V8/module/Accounts', baseUrl);
+  url.search = new URLSearchParams(
     `?filter[name][eq]=${name}&filter[operator]=and&filter[email1][eq]=${email}`,
   ).toString();
 
@@ -79,7 +79,7 @@ export const getFilteredAccounts = async (
       Authorization: `Bearer ${accessToken}`,
     },
   };
-  return request<any>(baseUrl, options);
+  return request<any>(url, options);
 };
 
 export const getFilteredContacts = async (
@@ -87,8 +87,8 @@ export const getFilteredContacts = async (
   phone: string,
   email: string,
 ) => {
-  baseUrl.pathname = '/V8/module/Contacts';
-  baseUrl.search = new URLSearchParams(
+  const url = new URL('/V8/module/Contacts', baseUrl);
+  url.search = new URLSearchParams(
     `?filter[phone_mobile][eq]=${phone}&filter[operator]=and&filter[email1][eq]=${email}`,
   ).toString();
 
@@ -99,15 +99,16 @@ export const getFilteredContacts = async (
       Authorization: `Bearer ${accessToken}`,
     },
   };
-  return request<any>(baseUrl, options);
+
+  return request<any>(url, options);
 };
 
 export const getFilteredCategories = async (
   accessToken: string,
   name: string,
 ) => {
-  baseUrl.pathname = '/V8/module/AOS_Product_Categories';
-  baseUrl.search = new URLSearchParams(`?filter[name][eq]=${name}`).toString();
+  const url = new URL('/V8/module/AOS_Product_Categories', baseUrl);
+  url.search = new URLSearchParams(`?filter[name][eq]=${name}`).toString();
 
   const options = {
     method: 'GET',
@@ -116,5 +117,5 @@ export const getFilteredCategories = async (
       Authorization: `Bearer ${accessToken}`,
     },
   };
-  return request<any>(baseUrl, options);
+  return request<any>(url, options);
 };

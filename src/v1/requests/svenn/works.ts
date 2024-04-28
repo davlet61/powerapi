@@ -1,4 +1,4 @@
-import { request } from "src/helpers";
+import { request } from 'src/helpers';
 
 export const createWork = async (accessToken: string, args: any) => {
   const url = new URL('/work', process.env.SVENN_URL);

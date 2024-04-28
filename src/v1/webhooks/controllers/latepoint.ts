@@ -4,7 +4,7 @@ import {
   getFilteredAccounts,
   getTokens,
   updateModule,
-} from '$v1/requests/suite/suiteRequests';
+} from 'src/v1/requests/suite/suiteRequests';
 
 export const moduleFromLatepoint = async (
   req: Request,
@@ -15,6 +15,7 @@ export const moduleFromLatepoint = async (
     const { customer } = req.body;
     const { custom_fields } = customer;
     const { access_token } = await getTokens();
+    console.log('access_token', access_token);
 
     const accountData = {
       data: {

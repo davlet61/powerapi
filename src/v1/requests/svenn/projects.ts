@@ -1,9 +1,9 @@
-import { request } from "src/helpers";
+import { request } from 'src/helpers';
 
 const baseUrl = new URL(process.env.SVENN_URL);
 
 export const createProject = async (accessToken: string, args: any) => {
-  baseUrl.pathname = '/project';
+  const url = new URL('/project', baseUrl);
   const options = {
     method: 'POST',
     headers: {
@@ -12,7 +12,7 @@ export const createProject = async (accessToken: string, args: any) => {
     },
     body: JSON.stringify(args),
   };
-  return request<any>(bseUrl, options);
+  return request<any>(url, options);
 };
 
 export const getProjects = async (
@@ -20,8 +20,8 @@ export const getProjects = async (
   limit: string,
   skip: string,
 ) => {
-  baseUrl.pathname = '/Project/?';
-  baseUrl.search = new URLSearchParams({
+  const url = new URL('/Project/?', baseUrl);
+  url.search = new URLSearchParams({
     $orderby: 'Code',
     $top: limit,
     $skip: skip,
@@ -33,12 +33,14 @@ export const getProjects = async (
       Authorization: `Bearer ${accessToken}`,
     },
   };
-  return request(baseUrl, options);
+  return request(url, options);
 };
 
 export const getProjectByName = async (accessToken: string, name: string) => {
-  baseUrl.pathname = '/Project';
-  baseUrl.search = new URLSearchParams(`?$filter=(tolower(Name) eq '${name}')`).toString();
+  const url = new URL('/Project', baseUrl);
+  url.search = new URLSearchParams(
+    `?$filter=(tolower(Name) eq '${name}')`,
+  ).toString();
   const options = {
     method: 'GET',
     headers: {
@@ -46,11 +48,11 @@ export const getProjectByName = async (accessToken: string, name: string) => {
       Authorization: `Bearer ${accessToken}`,
     },
   };
-  return request(baseUrl, options);
+  return request(url, options);
 };
 
 export const getProjectById = async (accessToken: string, id: string) => {
-  baseUrl.pathname = `/Project/${id}`;
+  const url = new URL(`/Project/${id}`, baseUrl);
   const options = {
     method: 'GET',
     headers: {
@@ -58,11 +60,11 @@ export const getProjectById = async (accessToken: string, id: string) => {
       Authorization: `Bearer ${accessToken}`,
     },
   };
-  return request(baseUrl, options);
+  return request(url, options);
 };
 
 export const deleteProjectById = async (accessToken: string, id: string) => {
-  baseUrl.pathname = `/Project/${id}`;
+  const url = new URL(`/Project/${id}`, baseUrl);
   const options = {
     method: 'DELETE',
     headers: {
@@ -70,5 +72,5 @@ export const deleteProjectById = async (accessToken: string, id: string) => {
       Authorization: `Bearer ${accessToken}`,
     },
   };
-  return request(baseUrl, options);
+  return request(url, options);
 };

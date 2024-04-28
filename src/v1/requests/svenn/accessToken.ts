@@ -5,7 +5,7 @@ export const getToken = async () => {
     email: process.env.SVENN_USER,
     password: process.env.SVENN_USER_PASS,
   });
-  const url = `${process.env.SVENN_URL}/login`;
+  const url = new URL('/login', process.env.SVENN_URL);
   const options = {
     method: 'POST',
     headers: {

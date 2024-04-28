@@ -7,6 +7,7 @@ export const keysToBase64 = (
 ): string => Buffer.from(`${applicationKey}:${clientKey}`).toString('base64');
 
 export const getTokens = async (base64: string) => {
+  const url = new URL('/oauth/token', process.env.PO_URL);
   const options = {
     method: 'POST',
     headers: {
@@ -15,13 +16,12 @@ export const getTokens = async (base64: string) => {
     },
     body: new URLSearchParams({ grant_type: 'client_credentials' }),
   };
-  const url = new URL(process.env.PO_URL);
-  url.pathname = '/oauth/token';
 
   return request<ITokenResponse>(url, options);
 };
 
 export const getTokenWithRefresh = async (refreshToken: string) => {
+  const url = new URL('/oauth/token', process.env.PO_URL);
   const options = {
     method: 'POST',
     headers: {
@@ -32,8 +32,6 @@ export const getTokenWithRefresh = async (refreshToken: string) => {
       refresh_token: refreshToken,
     }),
   };
-  const url = new URL(process.env.PO_URL);
-  url.pathname = '/oauth/token';
 
   return request<ITokenResponse>(url, options);
 };
