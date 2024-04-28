@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import request from 'supertest';
 import type { Application } from 'express';
-import type { AuthHeaders } from 'src/types';
+import { AuthHeaders } from '../types';
 
 // prettier-ignore
 export const authenticate = (

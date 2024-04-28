@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
-import { request } from 'src/helpers';
-import { POProductGroupT, POProductsType } from 'src/types';
+import { request } from '../../../helpers';
+import { POProductGroupT, POProductsType } from '../../../types';
 
 export const syncProducts = async (
   req: Request,

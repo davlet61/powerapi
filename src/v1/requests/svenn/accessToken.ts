@@ -1,4 +1,4 @@
-import { request } from 'src/helpers';
+import { request } from '../../../helpers';
 
 export const getToken = async () => {
   const data = JSON.stringify({

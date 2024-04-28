@@ -3,7 +3,7 @@ import {
   createInvoice,
   getInvoiceById,
   getInvoiceList,
-} from 'src/v1/requests/po/invoiceReqs';
+} from '../../requests/po/invoiceReqs';
 
 export const getList = async (
   req: Request,

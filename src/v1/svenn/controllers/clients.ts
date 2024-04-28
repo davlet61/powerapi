@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import path from 'path';
 import { writeFile } from 'fs/promises';
-import { createClient } from 'src/v1/requests/svenn/clients';
+import { createClient } from '../../requests/svenn/clients';
 
 export const createNew = async (
   req: Request,

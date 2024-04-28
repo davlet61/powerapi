@@ -6,7 +6,7 @@ import {
   getProductGroupById,
   getProductGroupList,
   getProductList,
-} from 'src/v1/requests/po/productsReqs';
+} from '../../requests/po/productsReqs';
 
 export const createNew = async (
   req: Request,

@@ -1,4 +1,4 @@
-import { request } from 'src/helpers';
+import { request } from '../../../helpers';
 
 export const createTask = async (accessToken: string, args: any) => {
   const url = new URL('/task', process.env.SVENN_URL);

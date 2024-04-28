@@ -1,5 +1,5 @@
-import { request } from 'src/helpers';
-import { ITokenResponse } from 'src/types';
+import { request } from '../../../helpers';
+import { ITokenResponse } from '../../../types';
 
 export const keysToBase64 = (
   applicationKey: string,

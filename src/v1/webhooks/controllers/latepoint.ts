@@ -4,7 +4,7 @@ import {
   getFilteredAccounts,
   getTokens,
   updateModule,
-} from 'src/v1/requests/suite/suiteRequests';
+} from '../../requests/suite/suiteRequests';
 
 export const moduleFromLatepoint = async (
   req: Request,

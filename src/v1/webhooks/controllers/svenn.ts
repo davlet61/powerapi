@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
-import { getToken } from 'src/v1/requests/svenn/accessToken';
-import { createClient } from 'src/v1/requests/svenn/clients';
-import { createProject } from 'src/v1/requests/svenn/projects';
-import { createTask } from 'src/v1/requests/svenn/tasks';
-import { createWork } from 'src/v1/requests/svenn/works';
+import { getToken } from '../../requests/svenn/accessToken';
+import { createClient } from '../../requests/svenn/clients';
+import { createProject } from '../../requests/svenn/projects';
+import { createTask } from '../../requests/svenn/tasks';
+import { createWork } from '../../requests/svenn/works';
 
 export const latepointToSvenn = async (
   req: Request,

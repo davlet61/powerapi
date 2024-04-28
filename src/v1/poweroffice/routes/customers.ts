@@ -1,11 +1,11 @@
 import { Router } from 'express';
-import { checkIfHeaderExists } from 'src/middleware/errorHandlers';
 import {
   createNew,
   customersController,
   deleteById,
   getById,
 } from '../controllers/customers';
+import { checkIfHeaderExists } from '../../../middleware/errorHandlers';
 
 const router: Router = Router({ mergeParams: true });
 

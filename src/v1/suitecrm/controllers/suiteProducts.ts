@@ -1,11 +1,11 @@
 import { NextFunction, Request, Response } from 'express';
-import { getProductGroupById } from 'src/v1/requests/po/productsReqs';
+import { getProductGroupById } from '../../requests/po/productsReqs';
 import {
   createNewModule,
   getFilteredCategories,
   getTokens,
   updateModule,
-} from 'src/v1/requests/suite/suiteRequests';
+} from '../../requests/suite/suiteRequests';
 
 export const createSuiteProduct = async (
   req: Request,

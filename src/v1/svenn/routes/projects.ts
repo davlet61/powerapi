@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { checkIfHeaderExists } from 'src/middleware/errorHandlers';
 import { createNew } from '../controllers/projects';
+import { checkIfHeaderExists } from '../../../middleware/errorHandlers';
 
 const projects: Router = Router();
 

@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { checkIfHeaderExists } from 'src/middleware/errorHandlers';
 import {
   createProductCategory,
   createSuiteProduct,
 } from '../controllers/suiteProducts';
+import { checkIfHeaderExists } from '../../../middleware/errorHandlers';
 
 const router: Router = Router();
 

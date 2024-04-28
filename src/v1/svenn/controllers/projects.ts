@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { createProject } from 'src/v1/requests/svenn/projects';
+import { createProject } from '../../requests/svenn/projects';
 
 export const createNew = async (
   req: Request,

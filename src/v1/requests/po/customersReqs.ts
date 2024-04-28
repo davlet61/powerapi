@@ -1,4 +1,4 @@
-import { request } from 'src/helpers';
+import { request } from '../../../helpers';
 
 export const createCustomer = async (accessToken: string, args: any) => {
   const url = new URL('/Customer', process.env.PO_URL);

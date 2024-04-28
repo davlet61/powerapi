@@ -1,4 +1,4 @@
-import { request } from 'src/helpers';
+import { request } from '../../../helpers';
 
 const baseUrl = new URL(process.env.PO_URL);
 

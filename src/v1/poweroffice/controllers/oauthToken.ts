@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
-import { IError } from 'src/types';
 import {
   getTokens,
   getTokenWithRefresh,
   keysToBase64,
 } from '../../requests/po/accessToken';
+import { IError } from '../../../types';
 
 export const getAccessToken = async (
   req: Request,
