@@ -1,6 +1,7 @@
-import { axiosRequest } from '$helpers';
+import { request } from "src/helpers";
 
 export const createWork = async (accessToken: string, args: any) => {
+  const url = new URL('/work', process.env.SVENN_URL);
   const options = {
     method: 'POST',
     url: '/work',
@@ -9,7 +10,7 @@ export const createWork = async (accessToken: string, args: any) => {
       'content-type': 'application/json; charset=utf-8',
       Authorization: `Bearer ${accessToken}`,
     },
-    data: args,
+    body: JSON.stringify(args),
   };
-  return axiosRequest(options);
+  return request(url, options);
 };

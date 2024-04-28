@@ -3,7 +3,7 @@ import { request } from 'src/helpers';
 const baseUrl = new URL(process.env.SVENN_URL);
 
 export const createClient = async (accessToken: string, args: any) => {
-  baseUrl.pathname = '/client';
+  const url = new URL('/client', baseUrl);
   const options = {
     method: 'POST',
     baseURL: process.env.SVENN_URL,
@@ -13,7 +13,7 @@ export const createClient = async (accessToken: string, args: any) => {
     },
     body: JSON.stringify(args),
   };
-  return request<any>(baseUrl, options);
+  return request<any>(url, options);
 };
 
 export const getClients = async (
@@ -21,8 +21,8 @@ export const getClients = async (
   limit: string,
   skip: string,
 ) => {
-  baseUrl.pathname = '/Client/?';
-  baseUrl.search = new URLSearchParams({
+  const url = new URL('/Client/?', baseUrl);
+  url.search = new URLSearchParams({
     $orderby: 'Code',
     $top: limit,
     $skip: skip,
@@ -35,12 +35,12 @@ export const getClients = async (
       Authorization: `Bearer ${accessToken}`,
     },
   };
-  return request(baseUrl, options);
+  return request(url, options);
 };
 
 export const getClientByName = async (accessToken: string, name: string) => {
-  baseUrl.pathname = '/Client';
-  baseUrl.search = new URLSearchParams(
+  const url = new URL('/Client', baseUrl);
+  url.search = new URLSearchParams(
     `?$filter=(tolower(Name) eq '${name}')`,
   ).toString();
   const options = {
@@ -50,11 +50,11 @@ export const getClientByName = async (accessToken: string, name: string) => {
       Authorization: `Bearer ${accessToken}`,
     },
   };
-  return request(baseUrl, options);
+  return request(url, options);
 };
 
 export const getClientById = async (accessToken: string, id: string) => {
-  baseUrl.pathname = `/Client/${id}`;
+  const url = new URL(`/Client/${id}`, baseUrl);
   const options = {
     method: 'GET',
     headers: {
@@ -62,11 +62,11 @@ export const getClientById = async (accessToken: string, id: string) => {
       Authorization: `Bearer ${accessToken}`,
     },
   };
-  return request(baseUrl, options);
+  return request(url, options);
 };
 
 export const deleteClientById = async (accessToken: string, id: string) => {
-  baseUrl.pathname = `/Client/${id}`;
+  const url = new URL(`/Client/${id}`, baseUrl);
   const options = {
     method: 'DELETE',
     headers: {
@@ -74,5 +74,5 @@ export const deleteClientById = async (accessToken: string, id: string) => {
       Authorization: `Bearer ${accessToken}`,
     },
   };
-  return request(baseUrl, options);
+  return request(url, options);
 };
