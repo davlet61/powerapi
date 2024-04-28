@@ -6,4 +6,4 @@ const router: Router = Router();
 router.post('/', getAccessToken);
 router.post('/refresh', refreshAccessToken);
 
-export default router;
+export { router as poOauth };

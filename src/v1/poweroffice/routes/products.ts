@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { checkIfHeaderExists } from '$middleware/errorHandlers';
+import { checkIfHeaderExists } from 'src/middleware/errorHandlers';
 import {
   createNew, deleteById, getGroupById, getProductGroups, productsController,
 } from '../controllers/products';
@@ -12,4 +12,4 @@ router.delete('/:id', checkIfHeaderExists, deleteById);
 router.get('/groups/:id', checkIfHeaderExists, getGroupById);
 router.get('/groups', checkIfHeaderExists, getProductGroups);
 
-export default router;
+export { router as poProducts };

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { checkIfHeaderExists } from '$middleware/errorHandlers';
+import { checkIfHeaderExists } from 'src/middleware/errorHandlers';
 import {
   createNew, customersController, deleteById, getById,
 } from '../controllers/customers';
@@ -11,4 +11,4 @@ router.get('/:id', checkIfHeaderExists, getById);
 router.post('/', checkIfHeaderExists, createNew);
 router.delete('/:id', checkIfHeaderExists, deleteById);
 
-export default router;
+export { router as poCustomers };

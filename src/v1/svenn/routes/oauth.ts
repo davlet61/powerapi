@@ -5,4 +5,4 @@ const auth: Router = Router();
 
 auth.post('/', getAccessToken);
 
-export default auth;
+export { auth };

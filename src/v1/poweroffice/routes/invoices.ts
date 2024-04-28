@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { checkIfHeaderExists } from '$middleware/errorHandlers';
+import { checkIfHeaderExists } from 'src/middleware/errorHandlers';
 import { createNew, getById, getList } from '../controllers/invoices';
 
 const router: Router = Router();
@@ -9,4 +9,4 @@ router.get('/:id', checkIfHeaderExists, getById);
 router.post('/', checkIfHeaderExists, createNew);
 router.delete('/:id', checkIfHeaderExists);
 
-export default router;
+export { router as poInvoices };
