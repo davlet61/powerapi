@@ -2,12 +2,13 @@ import { NextFunction, Request, Response } from 'express';
 import { writeFile } from 'fs/promises';
 import path from 'path';
 
-export const axiosRequest = async <T>(
-  options: RequestInfo,
+export const request = async <T>(
+  url: URL | string,
+  options: RequestInit,
 ): Promise<T> => {
   try {
-    const res = await fetch(options);
-    return await res.json() as T;
+    const res = await fetch(url, options);
+    return (await res.json()) as T;
   } catch (error: any) {
     writeFile(
       path.join(process.cwd(), 'powerapi.log'),

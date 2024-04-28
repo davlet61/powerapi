@@ -1,5 +1,5 @@
-import { ITokenResponse } from '$types';
-import { axiosRequest } from '$helpers';
+import { request } from 'src/helpers';
+import { ITokenResponse } from 'src/types';
 
 export const keysToBase64 = (
   applicationKey: string,
@@ -9,29 +9,31 @@ export const keysToBase64 = (
 export const getTokens = async (base64: string) => {
   const options = {
     method: 'POST',
-    url: '/oauth/token',
-    baseURL: process.env.PO_URL,
     headers: {
       'content-type': 'application/x-www-form-urlencoded; charset=utf-8',
       Authorization: `Basic ${base64}`,
     },
-    data: new URLSearchParams({ grant_type: 'client_credentials' }),
+    body: new URLSearchParams({ grant_type: 'client_credentials' }),
   };
-  return axiosRequest<ITokenResponse>(options);
+  const url = new URL(process.env.PO_URL);
+  url.pathname = '/oauth/token';
+
+  return request<ITokenResponse>(url, options);
 };
 
 export const getTokenWithRefresh = async (refreshToken: string) => {
   const options = {
     method: 'POST',
-    url: '/oauth/token',
-    baseURL: process.env.PO_URL,
     headers: {
       'content-type': 'application/x-www-form-urlencoded; charset=utf-8',
     },
-    data: new URLSearchParams({
+    body: new URLSearchParams({
       grant_type: 'refresh_token',
       refresh_token: refreshToken,
     }),
   };
-  return axiosRequest<ITokenResponse>(options);
+  const url = new URL(process.env.PO_URL);
+  url.pathname = '/oauth/token';
+
+  return request<ITokenResponse>(url, options);
 };

@@ -8,7 +8,9 @@ describe('PowerAPI endpoints', () => {
       .expect(200)
       .end((err, res) => {
         if (err) return done(err);
-        expect(res.text).toBe(JSON.stringify({ message: 'Welcome to Aploskod integration API!' }));
+        expect(res.text).toBe(
+          JSON.stringify({ message: 'Welcome to Aploskod integration API!' }),
+        );
         return done();
       });
   });

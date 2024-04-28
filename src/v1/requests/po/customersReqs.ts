@@ -1,17 +1,18 @@
-import { axiosRequest } from '$helpers';
+import { request } from 'src/helpers';
 
 export const createCustomer = async (accessToken: string, args: any) => {
   const options = {
     method: 'POST',
-    url: '/Customer',
-    baseURL: process.env.PO_URL,
     headers: {
       'content-type': 'application/json; charset=utf-8',
       Authorization: `Bearer ${accessToken}`,
     },
-    data: args,
+    body: JSON.stringify(args) || args,
   };
-  return axiosRequest(options);
+  const url = new URL(process.env.PO_URL);
+  url.pathname = '/Customer';
+
+  return request(url, options);
 };
 
 export const getCustomers = async (
@@ -21,57 +22,63 @@ export const getCustomers = async (
 ) => {
   const options = {
     method: 'GET',
-    url: '/Customer/?',
-    params: new URLSearchParams({
-      $orderby: 'Code',
-      $top: limit,
-      $skip: skip,
-    }),
-    baseURL: process.env.PO_URL,
     headers: {
       'content-type': 'application/json; charset=utf-8',
       Authorization: `Bearer ${accessToken}`,
     },
   };
-  return axiosRequest(options);
+  const url = new URL(process.env.PO_URL);
+  url.pathname = '/Customer/?';
+  url.search = new URLSearchParams({
+    $orderby: 'Code',
+    $top: limit,
+    $skip: skip,
+  }).toString();
+
+  return request(url, options);
 };
 
 export const getCustomerByName = async (accessToken: string, name: string) => {
   const options = {
     method: 'GET',
-    url: '/Customer',
-    params: new URLSearchParams(`?$filter=(tolower(Name) eq '${name}')`),
-    baseURL: process.env.PO_URL,
     headers: {
       'content-type': 'application/json; charset=utf-8',
       Authorization: `Bearer ${accessToken}`,
     },
   };
-  return axiosRequest(options);
+  const url = new URL(process.env.PO_URL);
+  url.pathname = '/Customer';
+  url.search = new URLSearchParams(
+    `?$filter=(tolower(Name) eq '${name}')`,
+  ).toString();
+
+  return request(url, options);
 };
 
 export const getCustomerById = async (accessToken: string, id: string) => {
   const options = {
     method: 'GET',
-    url: `/Customer/${id}`,
-    baseURL: process.env.PO_URL,
     headers: {
       'content-type': 'application/json; charset=utf-8',
       Authorization: `Bearer ${accessToken}`,
     },
   };
-  return axiosRequest(options);
+  const url = new URL(process.env.PO_URL);
+  url.pathname = `/Customer/${id}`;
+
+  return request(url, options);
 };
 
 export const deleteCustomerById = async (accessToken: string, id: string) => {
   const options = {
     method: 'DELETE',
-    url: `/Customer/${id}`,
-    baseURL: process.env.PO_URL,
     headers: {
       'content-type': 'application/json; charset=utf-8',
       Authorization: `Bearer ${accessToken}`,
     },
   };
-  return axiosRequest(options);
+  const url = new URL(process.env.PO_URL);
+  url.pathname = `/Customer/${id}`;
+
+  return request(url, options);
 };

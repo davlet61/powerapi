@@ -4,18 +4,19 @@ import app from '../app';
 
 const request = supertest(app);
 
-const authenticate = (headers: AuthHeaders, tokens: any) => (done: jest.DoneCallback) => {
-  request
-    .post('/v1/poweroffice/oauth')
-    .set('Application_key', headers.appKey)
-    .set('Client_key', headers.clientKey)
-    .expect(201)
-    .end((err, res) => {
-      if (err) return done(err);
-      Object.assign(tokens, JSON.parse(res.text));
-      return done();
-    });
-};
+const authenticate =
+  (headers: AuthHeaders, tokens: any) => (done: jest.DoneCallback) => {
+    request
+      .post('/v1/poweroffice/oauth')
+      .set('Application_key', headers.appKey)
+      .set('Client_key', headers.clientKey)
+      .expect(201)
+      .end((err, res) => {
+        if (err) return done(err);
+        Object.assign(tokens, JSON.parse(res.text));
+        return done();
+      });
+  };
 
 describe('SuiteCRM routes', () => {
   const tokens = {} as ITokenResponse;

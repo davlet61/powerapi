@@ -12,7 +12,10 @@
       "url": "https://github.com/salesagility/SuiteCRM/blob/master/LICENSE.txt"
     }
   },
-  "servers": [{ "url": "http://localhost/v1" }, { "url": "https://api.glasserviceoslo.no/v1" }],
+  "servers": [
+    { "url": "http://localhost/v1" },
+    { "url": "https://api.glasserviceoslo.no/v1" }
+  ],
   "paths": {
     "/powerapi/products/{id}": {
       "get": {

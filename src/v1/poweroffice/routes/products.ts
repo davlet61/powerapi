@@ -1,7 +1,11 @@
 import { Router } from 'express';
 import { checkIfHeaderExists } from 'src/middleware/errorHandlers';
 import {
-  createNew, deleteById, getGroupById, getProductGroups, productsController,
+  createNew,
+  deleteById,
+  getGroupById,
+  getProductGroups,
+  productsController,
 } from '../controllers/products';
 
 const router: Router = Router();
