@@ -7,4 +7,4 @@ const hooks: Router = Router();
 hooks.post('/latepoint', moduleFromLatepoint);
 hooks.post('/svenn', latepointToSvenn);
 
-export default hooks;
+export { hooks };

@@ -1,7 +1,6 @@
 import express, { Application } from 'express';
 import cors from 'cors';
 import * as Sentry from '@sentry/node';
-// import webhookRoutes from '$v1/webhooks/routes';
 import { poOauth } from './v1/poweroffice/routes/oauth';
 import { poCustomers } from './v1/poweroffice/routes/customers';
 import { poInvoices } from './v1/poweroffice/routes/invoices';
@@ -10,11 +9,10 @@ import { crmProducts } from './v1/suitecrm/routes/products';
 import { errorHandler, globalErrorHandler } from './middleware/errorHandlers';
 import { docs } from './v1/docs/router';
 import { sync } from './v1/sync/routes';
-import { moduleFromLatepoint } from './v1/webhooks/controllers/latepoint';
+import { hooks } from './v1/webhooks/routes';
 
 const app: Application = express();
 
-console.log(process.env);
 Sentry.init({
   dsn: 'https://19bd89163958457e9c1aedf8edfa69e4@o4504951835983872.ingest.sentry.io/4505062670729216',
   integrations: [
@@ -48,7 +46,7 @@ app.use('/v1/poweroffice/customers', poCustomers);
 app.use('/v1/poweroffice/invoices', poInvoices);
 app.use('/v1/poweroffice/products', poProducts);
 app.use('/v1/suitecrm/products', crmProducts);
-app.use('/v1/hooks/latepoint', moduleFromLatepoint);
+app.use('/v1/hooks', hooks);
 app.use('/v1/sync', sync);
 app.use('/v1/docs', docs);
 
