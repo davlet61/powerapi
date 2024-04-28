@@ -15,7 +15,7 @@ export const moduleFromLatepoint = async (
     const { customer } = req.body;
     const { custom_fields } = customer;
     const { access_token } = await getTokens();
-    console.log('access_token', access_token);
+    console.log({ access_token });
 
     const accountData = {
       data: {
