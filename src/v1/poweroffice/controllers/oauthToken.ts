@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { IError } from '$types';
+import { IError } from 'src/types';
 import {
   getTokens,
   getTokenWithRefresh,

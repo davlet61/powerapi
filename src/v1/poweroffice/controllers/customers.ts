@@ -1,11 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import {
-  createCustomer,
-  deleteCustomerById,
-  getCustomerById,
-  getCustomerByName,
-  getCustomers,
-} from '$v1/requests/po/customersReqs';
+  createCustomer, deleteCustomerById,
+  getCustomerById, getCustomerByName, getCustomers,
+} from 'src/v1/requests/po/customersReqs';
 
 export const createNew = async (
   req: Request,

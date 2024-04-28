@@ -1,7 +1,7 @@
 import path from 'path';
 import { writeFile } from 'fs/promises';
 import { Request, Response, NextFunction } from 'express';
-import { IError } from '$types';
+import { IError } from '../types';
 
 export const errorHandler = (_req: Request, _res: Response, next: NextFunction) => {
   const err: IError = new Error('Not Found');
