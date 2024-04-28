@@ -1,17 +1,19 @@
-import { axiosRequest } from '$helpers';
+import { request } from 'src/helpers';
+
+const baseUrl = new URL(process.env.SVENN_URL);
 
 export const createClient = async (accessToken: string, args: any) => {
+  baseUrl.pathname = '/client';
   const options = {
     method: 'POST',
-    url: '/client',
     baseURL: process.env.SVENN_URL,
     headers: {
       'content-type': 'application/json; charset=utf-8',
       Authorization: `Bearer ${accessToken}`,
     },
-    data: args,
+    body: JSON.stringify(args),
   };
-  return axiosRequest<any>(options);
+  return request<any>(baseUrl, options);
 };
 
 export const getClients = async (
@@ -19,59 +21,58 @@ export const getClients = async (
   limit: string,
   skip: string,
 ) => {
+  baseUrl.pathname = '/Client/?';
+  baseUrl.search = new URLSearchParams({
+    $orderby: 'Code',
+    $top: limit,
+    $skip: skip,
+  }).toString();
+
   const options = {
     method: 'GET',
-    url: '/Client/?',
-    params: new URLSearchParams({
-      $orderby: 'Code',
-      $top: limit,
-      $skip: skip,
-    }),
-    baseURL: process.env.SVENN_URL,
     headers: {
       'content-type': 'application/json; charset=utf-8',
       Authorization: `Bearer ${accessToken}`,
     },
   };
-  return axiosRequest(options);
+  return request(baseUrl, options);
 };
 
 export const getClientByName = async (accessToken: string, name: string) => {
+  baseUrl.pathname = '/Client';
+  baseUrl.search = new URLSearchParams(
+    `?$filter=(tolower(Name) eq '${name}')`,
+  ).toString();
   const options = {
     method: 'GET',
-    url: '/Client',
-    params: new URLSearchParams(`?$filter=(tolower(Name) eq '${name}')`),
-    baseURL: process.env.SVENN_URL,
     headers: {
       'content-type': 'application/json; charset=utf-8',
       Authorization: `Bearer ${accessToken}`,
     },
   };
-  return axiosRequest(options);
+  return request(baseUrl, options);
 };
 
 export const getClientById = async (accessToken: string, id: string) => {
+  baseUrl.pathname = `/Client/${id}`;
   const options = {
     method: 'GET',
-    url: `/Client/${id}`,
-    baseURL: process.env.SVENN_URL,
     headers: {
       'content-type': 'application/json; charset=utf-8',
       Authorization: `Bearer ${accessToken}`,
     },
   };
-  return axiosRequest(options);
+  return request(baseUrl, options);
 };
 
 export const deleteClientById = async (accessToken: string, id: string) => {
+  baseUrl.pathname = `/Client/${id}`;
   const options = {
     method: 'DELETE',
-    url: `/Client/${id}`,
-    baseURL: process.env.SVENN_URL,
     headers: {
       'content-type': 'application/json; charset=utf-8',
       Authorization: `Bearer ${accessToken}`,
     },
   };
-  return axiosRequest(options);
+  return request(baseUrl, options);
 };
