@@ -1,16 +1,15 @@
 import { request } from 'src/helpers';
 
 export const createCustomer = async (accessToken: string, args: any) => {
+  const url = new URL('/Customer', process.env.PO_URL);
   const options = {
     method: 'POST',
     headers: {
       'content-type': 'application/json; charset=utf-8',
       Authorization: `Bearer ${accessToken}`,
     },
-    body: JSON.stringify(args) || args,
+    body: JSON.stringify(args),
   };
-  const url = new URL(process.env.PO_URL);
-  url.pathname = '/Customer';
 
   return request(url, options);
 };
@@ -27,8 +26,7 @@ export const getCustomers = async (
       Authorization: `Bearer ${accessToken}`,
     },
   };
-  const url = new URL(process.env.PO_URL);
-  url.pathname = '/Customer/?';
+  const url = new URL('/Customer/?', process.env.PO_URL);
   url.search = new URLSearchParams({
     $orderby: 'Code',
     $top: limit,
@@ -46,8 +44,7 @@ export const getCustomerByName = async (accessToken: string, name: string) => {
       Authorization: `Bearer ${accessToken}`,
     },
   };
-  const url = new URL(process.env.PO_URL);
-  url.pathname = '/Customer';
+  const url = new URL('/Customer', process.env.PO_URL);
   url.search = new URLSearchParams(
     `?$filter=(tolower(Name) eq '${name}')`,
   ).toString();
@@ -63,8 +60,7 @@ export const getCustomerById = async (accessToken: string, id: string) => {
       Authorization: `Bearer ${accessToken}`,
     },
   };
-  const url = new URL(process.env.PO_URL);
-  url.pathname = `/Customer/${id}`;
+  const url = new URL(`/Customer/${id}`, process.env.PO_URL);
 
   return request(url, options);
 };
@@ -77,8 +73,7 @@ export const deleteCustomerById = async (accessToken: string, id: string) => {
       Authorization: `Bearer ${accessToken}`,
     },
   };
-  const url = new URL(process.env.PO_URL);
-  url.pathname = `/Customer/${id}`;
+  const url = new URL(`/Customer/${id}`, process.env.PO_URL);
 
   return request(url, options);
 };

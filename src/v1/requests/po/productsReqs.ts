@@ -1,17 +1,18 @@
-import { axiosRequest } from '$helpers';
+import { request } from 'src/helpers';
+
+const baseUrl = new URL(process.env.PO_URL);
 
 export const createProduct = async (accessToken: string, args: any) => {
+  const url = new URL('/Product', baseUrl);
   const options = {
     method: 'POST',
-    url: '/Product',
-    baseURL: process.env.PO_URL,
     headers: {
       'content-type': 'application/json; charset=utf-8',
       Authorization: `Bearer ${accessToken}`,
     },
-    data: args,
+    body: JSON.stringify(args),
   };
-  return axiosRequest(options);
+  return request(url, options);
 };
 
 export const getProductList = async (
@@ -19,44 +20,45 @@ export const getProductList = async (
   limit: string,
   skip: string,
 ) => {
+  const url = new URL('/Product', baseUrl);
+  url.search = new URLSearchParams(
+    `?$orderby=Code&$top=${limit}&$skip=${skip}`,
+  ).toString();
   const options = {
     method: 'GET',
-    url: '/Product',
-    params: new URLSearchParams(`?$orderby=Code&$top=${limit}&$skip=${skip}`),
-    baseURL: process.env.PO_URL,
     headers: {
       'content-type': 'application/json; charset=utf-8',
       Authorization: `Bearer ${accessToken}`,
     },
   };
-  return axiosRequest(options);
+  return request(url, options);
 };
 
 export const getProductGroupById = async (accessToken: string, id: string) => {
+  const url = new URL(`/ProductGroup/${id}`, baseUrl);
   const options = {
     method: 'GET',
-    url: `/ProductGroup/${id}`,
-    baseURL: process.env.PO_URL,
     headers: {
       'content-type': 'application/json; charset=utf-8',
       Authorization: `Bearer ${accessToken}`,
     },
   };
-  return axiosRequest<any>(options);
+  return request<any>(url, options);
 };
 
 export const getProductByCode = async (accessToken: string, code: string) => {
+  const url = new URL('/Product', baseUrl);
+  url.search = new URLSearchParams(
+    `?$filter=(tolower(Code) eq '${code}')`,
+  ).toString();
   const options = {
     method: 'GET',
-    url: '/Product',
-    params: new URLSearchParams(`?$filter=(tolower(Code) eq '${code}')`),
-    baseURL: process.env.PO_URL,
     headers: {
       'content-type': 'application/json; charset=utf-8',
       Authorization: `Bearer ${accessToken}`,
     },
   };
-  return axiosRequest(options);
+  return request(url, options);
 };
 
 export const getProductGroupList = async (
@@ -64,28 +66,28 @@ export const getProductGroupList = async (
   limit: string,
   skip: string,
 ) => {
+  const url = new URL('/ProductGroup', baseUrl);
+  url.search = new URLSearchParams(
+    `?$orderby=Code&$top=${limit}&$skip=${skip}`,
+  ).toString();
   const options = {
     method: 'GET',
-    url: '/ProductGroup',
-    params: new URLSearchParams(`?$orderby=Code&$top=${limit}&$skip=${skip}`),
-    baseURL: process.env.PO_URL,
     headers: {
       'content-type': 'application/json; charset=utf-8',
       Authorization: `Bearer ${accessToken}`,
     },
   };
-  return axiosRequest(options);
+  return request(url, options);
 };
 
 export const deleteProductById = async (accessToken: string, id: string) => {
+  const url = new URL(`/Product/${id}`, baseUrl);
   const options = {
     method: 'DELETE',
-    url: `/Product/${id}`,
-    baseURL: process.env.PO_URL,
     headers: {
       'content-type': 'application/json; charset=utf-8',
       Authorization: `Bearer ${accessToken}`,
     },
   };
-  return axiosRequest(options);
+  return request(url, options);
 };

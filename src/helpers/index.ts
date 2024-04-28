@@ -8,7 +8,8 @@ export const request = async <T>(
 ): Promise<T> => {
   try {
     const res = await fetch(url, options);
-    return (await res.json()) as T;
+    const data = (await res.json()) as T;
+    return data;
   } catch (error: any) {
     writeFile(
       path.join(process.cwd(), 'powerapi.log'),

@@ -1,5 +1,5 @@
+import type { AuthHeaders, ITokenResponse } from 'src/types';
 import supertest from 'supertest';
-import { AuthHeaders, ITokenResponse } from '$types';
 import app from '../app';
 
 const request = supertest(app);

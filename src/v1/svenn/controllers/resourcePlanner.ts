@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { createWork } from '$v1/requests/svenn/works';
+import { createWork } from 'src/v1/requests/svenn/works';
 
 export const createNew = async (
   req: Request,

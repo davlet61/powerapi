@@ -1,41 +1,40 @@
-import { axiosRequest } from '$helpers';
+import { request } from 'src/helpers';
+
+const baseUrl = new URL(process.env.PO_URL);
 
 export const getInvoiceById = async (accessToken: string, id: string) => {
+  const url = new URL(`/OutgoingInvoice/${id}`, baseUrl);
   const options = {
     method: 'GET',
-    url: `/OutgoingInvoice/${id}`,
-    baseURL: process.env.PO_URL,
     headers: {
       'content-type': 'application/json; charset=utf-8',
       Authorization: `Bearer ${accessToken}`,
     },
   };
-  return axiosRequest(options);
+  return request(url, options);
 };
 
 export const getInvoiceList = async (accessToken: string) => {
+  const url = new URL('/OutgoingInvoice/List', baseUrl);
   const options = {
     method: 'GET',
-    url: '/OutgoingInvoice/List',
-    baseURL: process.env.PO_URL,
     headers: {
       'content-type': 'application/json; charset=utf-8',
       Authorization: `Bearer ${accessToken}`,
     },
   };
-  return axiosRequest(options);
+  return request(url, options);
 };
 
 export const createInvoice = async (accessToken: string, args: any) => {
+  const url = new URL('/OutgoingInvoice', baseUrl);
   const options = {
     method: 'POST',
-    url: '/OutgoingInvoice',
-    baseURL: process.env.PO_URL,
     headers: {
       'content-type': 'application/json; charset=utf-8',
       Authorization: `Bearer ${accessToken}`,
     },
-    data: args,
+    body: JSON.stringify(args),
   };
-  return axiosRequest(options);
+  return request(url, options);
 };

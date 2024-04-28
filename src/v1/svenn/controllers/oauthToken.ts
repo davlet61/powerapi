@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { getToken } from '$v1/requests/svenn/accessToken';
+import { getToken } from 'src/v1/requests/svenn/accessToken';
 
 export const getAccessToken = async (
   req: Request,
