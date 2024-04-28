@@ -15,9 +15,6 @@
     "strict": true,
     "skipLibCheck": true,
     "baseUrl": ".",
-    "paths": {
-      "$*": ["src/*"]
-    }
   },
   "exclude": ["jest.config.ts"]
 }
